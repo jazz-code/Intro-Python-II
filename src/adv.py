@@ -36,7 +36,10 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-# print(room['outside'])
+# for k in room:
+#     for v in k:
+#         print(k)
+# print(room)
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -71,21 +74,58 @@ p1 = Player("player", room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+def wrong_key():
+    if value != "y" or "n" "q":
+        print("Invalid Key")
 
+### Function Directions ###
+def outside():
+    p1 = Player("player", room['outside'])
+    print(f"{p1}")
+    value = str(input("> "))
+
+def foyer():
+    p1 = Player("player", room['foyer'])
+    print(f"{p1}")
+    value = str(input("> "))
+
+def overlook():
+    p1 = Player("player", room['overlook'])
+    print(f"{p1}")
+    value = str(input("> "))
+
+def narrow():
+    p1 = Player("player", room['narrow'])
+    print(f"{p1}")
+    value = str(input("> "))
+
+def treasure():
+    p1 = Player("player", room['treasure'])
+    print(f"{p1}")
+    value = str(input("> "))
+
+### Main Loop ###
 while True:
     print(p1)
     print()
     print("Would you like to go north? (y/n/q): ")
-    direction = str(input("> "))
+    value = str(input("> "))
 
     # try:
     print()
-    if direction == "y":
-        p1 = Player("player", room['foyer'])
-        print(p1)
-        break
-    elif direction == "q":
-        print("Quit")
-        break
+    if value == "y":
+        foyer()
+        if value == "s":
+            outside()
+        if value == "n":
+            overlook()
+        if value == "e":
+           narrow()
+    elif value != "y" or "n" "q":
+        print("Invalid key!")
+        print()
+        continue
+    elif wrong_key():
+        continue
     else:
-        print("Quit")
+        continue
