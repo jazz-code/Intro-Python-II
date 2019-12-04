@@ -1,6 +1,21 @@
-from room import Room
+import textwrap
 
+from room import Room
+from player import Player
 # Declare all the rooms
+
+# print title and directions
+
+# player moves, prints direction,
+
+# method get_current_room -> prints current room description
+
+# n_to == none if not none -> direction
+
+# player.get_current_room
+
+# player has name, current room,
+
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -21,7 +36,7 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
+# print(room['outside'])
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -36,8 +51,15 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
+# name = input("What is your name?: ")
 
 # Make a new player object that is currently in the 'outside' room.
+
+# p1 = Player(name, room['outside'])
+# p1 = Player("player", room['foyer'].s_to)
+p1 = Player("player", room['outside'])
+
+# p1.get_current_room()
 
 # Write a loop that:
 #
@@ -49,3 +71,21 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while True:
+    print(p1)
+    print()
+    print("Would you like to go north? (y/n/q): ")
+    direction = str(input("> "))
+
+    # try:
+    print()
+    if direction == "y":
+        p1 = Player("player", room['foyer'])
+        print(p1)
+        break
+    elif direction == "q":
+        print("Quit")
+        break
+    else:
+        print("Quit")

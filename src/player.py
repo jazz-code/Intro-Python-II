@@ -8,3 +8,6 @@ class Player:
 
     def get_current_room(self):
         print(f"{self.name} is {self.room}")
+
+    def __str__(self):
+        return f"{self.room}"
