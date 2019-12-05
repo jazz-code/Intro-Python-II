@@ -61,7 +61,7 @@ room['treasure'].s_to = room['narrow']
 # p1 = Player(name, room['outside'])
 # p1 = Player("player", room['foyer'].s_to)
 p1 = Player("player", room['outside'])
-
+# print(p1.room)
 # p1.get_current_room()
 
 # Write a loop that:
@@ -78,49 +78,40 @@ def wrong_key():
     if value != "y" or "n" "q":
         print("Invalid Key")
 
-### Function Directions ###
-def outside():
-    p1 = Player("player", room['outside'])
-    print(f"{p1}")
-    value = str(input("> "))
-
-def foyer():
-    p1 = Player("player", room['foyer'])
-    print(f"{p1}")
-    value = str(input("> "))
-
-def overlook():
-    p1 = Player("player", room['overlook'])
-    print(f"{p1}")
-    value = str(input("> "))
-
-def narrow():
-    p1 = Player("player", room['narrow'])
-    print(f"{p1}")
-    value = str(input("> "))
-
-def treasure():
-    p1 = Player("player", room['treasure'])
-    print(f"{p1}")
-    value = str(input("> "))
-
 ### Main Loop ###
 while True:
     print(p1)
     print()
-    print("Would you like to go north? (y/n/q): ")
+    print("Pick a direction: (n/s/e/w) ")
     value = str(input("> "))
 
     # try:
     print()
-    if value == "y":
-        foyer()
-        if value == "s":
-            outside()
-        if value == "n":
-            overlook()
-        if value == "e":
-           narrow()
+    if value is "n":
+        if p1.room.n_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.n_to
+            print("You move north")
+    elif value is "s":
+        if p1.room.s_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.s_to
+            print("You move south")
+    elif value is "e":
+        if p1.room.e_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.e_to
+            print("You move east")
+    elif value is "w":
+        if p1.room.w_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.w_to
+            print("You move west")
+
     elif value != "y" or "n" "q":
         print("Invalid key!")
         print()
@@ -128,4 +119,5 @@ while True:
     elif wrong_key():
         continue
     else:
+        wrong_key()
         continue

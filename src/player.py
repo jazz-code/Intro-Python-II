@@ -5,6 +5,7 @@ class Player:
     def __init__(self, name, room):
         self.name = name
         self.room = room
+        self.inventory = []
 
     def get_current_room(self):
         print(f"{self.name} is {self.room}")

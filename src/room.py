@@ -15,8 +15,8 @@ class Room:
         #value = wrapper.wrap(text=self.description)
         return f"{self.description}"
 
-    # def get_current_room(self):
-    #     return f"{Room([])}"
+    def get_current_room(self):
+        return f"{Room([])}"
 
 # r = Room("test", "testing")
 #print(r)
