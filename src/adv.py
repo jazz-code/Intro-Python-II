@@ -2,20 +2,8 @@ import textwrap
 
 from room import Room
 from player import Player
+from item import Item
 # Declare all the rooms
-
-# print title and directions
-
-# player moves, prints direction,
-
-# method get_current_room -> prints current room description
-
-# n_to == none if not none -> direction
-
-# player.get_current_room
-
-# player has name, current room,
-
 
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -36,10 +24,6 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-# for k in room:
-#     for v in k:
-#         print(k)
-# print(room)
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -51,18 +35,18 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+### Items in Rooms ###
+
+room['outside'].items.append(Item("torch", "An unlit torch"))
+
 #
 # Main
 #
-# name = input("What is your name?: ")
 
 # Make a new player object that is currently in the 'outside' room.
 
-# p1 = Player(name, room['outside'])
-# p1 = Player("player", room['foyer'].s_to)
 p1 = Player("player", room['outside'])
-# print(p1.room)
-# p1.get_current_room()
+
 
 # Write a loop that:
 #
@@ -81,7 +65,11 @@ def wrong_key():
 ### Main Loop ###
 while True:
     print(p1)
-    print()
+    # print("You see: ")
+    for item in p1.inventory:
+        print(f"{item}")
+    for item in p1.room.items:
+        print(f"You see a {item}")
     print("Pick a direction: (n/s/e/w) ")
     value = str(input("> "))
 
@@ -112,12 +100,19 @@ while True:
             p1.room = p1.room.w_to
             print("You move west")
 
-    elif value != "y" or "n" "q":
-        print("Invalid key!")
-        print()
-        continue
-    elif wrong_key():
-        continue
+    # elif len(value.split(' ')) is 2:
+    #     if value.split(' ')[0] == "get":
+    #         for item in p1.inventory:
+    #             if item.name == value.split(" ")[1]:
+    #                 p1.inventory.append(item)
+    #                 p1.room.items.remove(item)
+    #                 print(f"Picked up {p1.inventory[0]}")
+        # continue
+    elif for i in p1.room.items:
+        if item[1] == i.name and item[0] == "get":
+            p1.items.append(i)
+            print(f"Picked up {item}")
+            p1.current_room.items.remove(i)
     else:
-        wrong_key()
+        # wrong_key()
         continue
