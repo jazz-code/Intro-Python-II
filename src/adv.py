@@ -24,6 +24,11 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+items = {
+    'torch': Item("torch", """An unlit torch""")
+}
+
+
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -36,8 +41,9 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 ### Items in Rooms ###
-
-room['outside'].items.append(Item("torch", "An unlit torch"))
+room['outside'].add_item(items['torch'])
+# room['outside'].items.append(Item(f"{items['torch']}", ['torch']))
+# room['outside'].items.append(Item("torch", "An unlit torch"))
 
 #
 # Main
@@ -100,6 +106,21 @@ while True:
             p1.room = p1.room.w_to
             print("You move west")
 
+    elif len(value.split(' ')) is 2:
+        # value == "get":
+        if value.split(' ')[0] == "get" or "take":
+            print("room ",p1.room)
+            # for item in p1.room:
+            #     print(item)
+        # value == value.split(' ')
+        # if value.split(' ')[0] == "get":
+     
+        # for item in p1.room:
+        #     if item == item.name:
+        #         p1.inventory.append(item)
+        #         p1.room.items.remove(item)
+        #         print("Picked up item")
+
     # elif len(value.split(' ')) is 2:
     #     if value.split(' ')[0] == "get":
     #         for item in p1.inventory:
@@ -108,11 +129,12 @@ while True:
     #                 p1.room.items.remove(item)
     #                 print(f"Picked up {p1.inventory[0]}")
         # continue
-    elif for i in p1.room.items:
-        if item[1] == i.name and item[0] == "get":
-            p1.items.append(i)
-            print(f"Picked up {item}")
-            p1.current_room.items.remove(i)
+    # elif value
+    # i in p1.room.items:
+    #     if item[1] == i.name and item[0] == "get":
+    #         p1.items.append(i)
+    #         print(f"Picked up {item}")
+    #         p1.current_room.items.remove(i)
     else:
         # wrong_key()
         continue
