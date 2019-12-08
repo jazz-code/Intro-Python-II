@@ -68,12 +68,14 @@ def wrong_key():
 
 ### Main Loop ###
 while True:
+    print()
     print(p1)
     # print("You see: ")
-    for item in p1.inventory:
-        print(f"Inventory: {item}")
+    # for item in p1.inventory:
+    #     print(f"Inventory: {item}")
     for item in p1.room.items:
         print(f"You see a {item}")
+        print()
     print("Pick a direction: (n/s/e/w) ")
     value = str(input("> "))
 
@@ -104,6 +106,15 @@ while True:
             p1.room = p1.room.w_to
             print("You move west")
 
+    elif value == "inv":
+        for item in p1.inventory:
+            print(f"Inventory: {item}")
+            print()
+        else:
+            if p1.inventory == 0:
+                print("Nothing in inventory")
+                print()
+
     elif len(value.split(' ')) is 2:
         if value.split(' ')[0] == "get" or "take":
             for item in p1.room.items:
@@ -111,7 +122,6 @@ while True:
                     p1.inventory.append(item)
                     print(f"You picked up a {item}")
                     p1.room.items.remove(item)
-
             # if value.split(' ')[1] == item in p1.room.items:
             #     print("works", item)
             # if item in p1.room.items == item:

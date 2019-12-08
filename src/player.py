@@ -14,7 +14,8 @@ class Player:
         return self.inventory.append(item)
 
     def check_inventory(self):
-        return f"Inventory: {inventory}"
+        return f"Inventory: {self.inventory}"
+        # print(f"Inventory: {self.inventory}")
 
     def __str__(self):
         return f"{self.room}"
