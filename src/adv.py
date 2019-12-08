@@ -42,8 +42,6 @@ room['treasure'].s_to = room['narrow']
 
 ### Items in Rooms ###
 room['outside'].add_item(items['torch'])
-# room['outside'].items.append(Item(f"{items['torch']}", ['torch']))
-# room['outside'].items.append(Item("torch", "An unlit torch"))
 
 #
 # Main
@@ -73,7 +71,7 @@ while True:
     print(p1)
     # print("You see: ")
     for item in p1.inventory:
-        print(f"{item}")
+        print(f"Inventory: {item}")
     for item in p1.room.items:
         print(f"You see a {item}")
     print("Pick a direction: (n/s/e/w) ")
@@ -107,9 +105,26 @@ while True:
             print("You move west")
 
     elif len(value.split(' ')) is 2:
-        # value == "get":
         if value.split(' ')[0] == "get" or "take":
-            print("room ",p1.room)
+            for item in p1.room.items:
+                if item.name == value.split(' ')[1]:
+                    p1.inventory.append(item)
+                    print(f"You picked up a {item}")
+                    p1.room.items.remove(item)
+
+            # if value.split(' ')[1] == item in p1.room.items:
+            #     print("works", item)
+            # if item in p1.room.items == item:
+            #     p1.inventory.append(item)
+            #     print("works", p1.inventory)
+            #     print("item", item)
+            
+            # for item in p1.room.items:
+            #     print(p1.room.items)
+                #if value.split('')[1] == item.name
+                 #   print("item",item)
+            # p1.inventory.append(items['torch'])
+            # print("room ",p1.inventory)
             # for item in p1.room:
             #     print(item)
         # value == value.split(' ')

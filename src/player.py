@@ -10,8 +10,11 @@ class Player:
     def get_current_room(self):
         print(f"{self.name} is {self.room}")
 
-    def inventory(self):
-        return f"{inventory}"
+    def add_item(self, item):
+        return self.inventory.append(item)
+
+    def check_inventory(self):
+        return f"Inventory: {inventory}"
 
     def __str__(self):
         return f"{self.room}"
