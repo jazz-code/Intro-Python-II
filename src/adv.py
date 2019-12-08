@@ -107,59 +107,37 @@ while True:
             print("You move west")
 
     elif value == "inv":
-        for item in p1.inventory:
-            print(f"Inventory: {item}")
-            print()
-        else:
-            if p1.inventory == 0:
+        if p1.inventory == 0:
                 print("Nothing in inventory")
                 print()
-
-    elif len(value.split(' ')) is 2:
-        if value.split(' ')[0] == "get" or "take":
+        else:
+            for item in p1.inventory:
+                print(f"Inventory: {item}")
+                print()
+    ### Pick up / Drop items ###
+    elif len(value.split(' ')) == 2: # and value.split(' ')[0] == "get" or "take":
+        if value.split(' ')[0] == "get":
             for item in p1.room.items:
                 if item.name == value.split(' ')[1]:
                     p1.inventory.append(item)
                     print(f"You picked up a {item}")
                     p1.room.items.remove(item)
-            # if value.split(' ')[1] == item in p1.room.items:
-            #     print("works", item)
-            # if item in p1.room.items == item:
-            #     p1.inventory.append(item)
-            #     print("works", p1.inventory)
-            #     print("item", item)
-            
-            # for item in p1.room.items:
-            #     print(p1.room.items)
-                #if value.split('')[1] == item.name
-                 #   print("item",item)
-            # p1.inventory.append(items['torch'])
-            # print("room ",p1.inventory)
-            # for item in p1.room:
-            #     print(item)
-        # value == value.split(' ')
-        # if value.split(' ')[0] == "get":
-     
-        # for item in p1.room:
-        #     if item == item.name:
-        #         p1.inventory.append(item)
-        #         p1.room.items.remove(item)
-        #         print("Picked up item")
 
-    # elif len(value.split(' ')) is 2:
-    #     if value.split(' ')[0] == "get":
-    #         for item in p1.inventory:
-    #             if item.name == value.split(" ")[1]:
-    #                 p1.inventory.append(item)
-    #                 p1.room.items.remove(item)
-    #                 print(f"Picked up {p1.inventory[0]}")
-        # continue
-    # elif value
-    # i in p1.room.items:
-    #     if item[1] == i.name and item[0] == "get":
-    #         p1.items.append(i)
-    #         print(f"Picked up {item}")
-    #         p1.current_room.items.remove(i)
+        elif value.split(' ')[0] == "drop":
+            for item in p1.inventory:
+                if item.name == value.split(' ')[1]:
+                    p1.inventory.remove(item)
+                    print(f"You dropped a {item}")
+                    p1.room.items.append(item)
+        else:
+            print("Invalid command. Did you mean 'get' or 'drop'?")
+    elif value is "q":
+        print("Play again?")
+        break
+        # if value is "y":
+        #     break
+        # else:
+        #     continue
     else:
         # wrong_key()
         continue
