@@ -1,5 +1,8 @@
-from room import Room
+import textwrap
 
+from room import Room
+from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
@@ -21,6 +24,10 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+items = {
+    'torch': Item("torch", """An unlit torch""")
+}
+
 
 # Link rooms together
 
@@ -33,11 +40,17 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+### Items in Rooms ###
+room['outside'].add_item(items['torch'])
+
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
+
+p1 = Player("player", room['outside'])
+
 
 # Write a loop that:
 #
@@ -49,3 +62,82 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+def wrong_key():
+    if value != "y" or "n" "q":
+        print("Invalid Key")
+
+### Main Loop ###
+while True:
+    print()
+    print(p1)
+    # print("You see: ")
+    # for item in p1.inventory:
+    #     print(f"Inventory: {item}")
+    for item in p1.room.items:
+        print(f"You see a {item}")
+        print()
+    print("Pick a direction: (n/s/e/w) ")
+    value = str(input("> "))
+
+    # try:
+    print()
+    if value is "n":
+        if p1.room.n_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.n_to
+            print("You move north")
+    elif value is "s":
+        if p1.room.s_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.s_to
+            print("You move south")
+    elif value is "e":
+        if p1.room.e_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.e_to
+            print("You move east")
+    elif value is "w":
+        if p1.room.w_to is None:
+            print("You can't go that way, try again")
+        else:
+            p1.room = p1.room.w_to
+            print("You move west")
+
+    elif value == "inv":
+        if p1.inventory == 0:
+                print("Nothing in inventory")
+                print()
+        else:
+            for item in p1.inventory:
+                print(f"Inventory: {item}")
+                print()
+    ### Pick up / Drop items ###
+    elif len(value.split(' ')) == 2: # and value.split(' ')[0] == "get" or "take":
+        if value.split(' ')[0] == "get":
+            for item in p1.room.items:
+                if item.name == value.split(' ')[1]:
+                    p1.inventory.append(item)
+                    print(f"You picked up a {item}")
+                    p1.room.items.remove(item)
+
+        elif value.split(' ')[0] == "drop":
+            for item in p1.inventory:
+                if item.name == value.split(' ')[1]:
+                    p1.inventory.remove(item)
+                    print(f"You dropped a {item}")
+                    p1.room.items.append(item)
+        else:
+            print("Invalid command. Did you mean 'get' or 'drop'?")
+    elif value is "q":
+        print("Play again?")
+        break
+        # if value is "y":
+        #     break
+        # else:
+        #     continue
+    else:
+        # wrong_key()
+        continue
